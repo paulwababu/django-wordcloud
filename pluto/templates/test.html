@@ -1,0 +1,311 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>ChatAnalyzer - Visualize your WhatsApp Chats</title>
+    <script src="https://res.cloudinary.com/jhini-chadariya/raw/upload/v1579093193/jscss/aos_y7nuwu.js"></script>
+    <link rel="stylesheet" href="https://res.cloudinary.com/jhini-chadariya/raw/upload/v1579093192/jscss/aos_kkkheg.css">
+    <!-- Bootstrap core CSS -->
+
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+
+    <!-- Custom fonts for this template -->
+    <link
+      href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+      integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/freelancer.css' %}" rel="stylesheet" />
+
+    <!-- Custom styles -->
+    <link href="{% static 'css/custom.css' %}" rel="stylesheet" />
+  </head>
+
+  <body id="page-top">
+    <h5 class="text-center pt-2 text-secondary">
+      Chat data is not used, this is for educational purposes only -
+      <a
+        href="https://github.com/paulwababu"
+        target="_blank"
+        class="text-small"
+        >Github <i class="fab fa-github"></i
+      ></a>
+    </h5>
+
+    <!-- Header -->
+    <header class="masthead bg-primary text-white">
+      <div class="container">
+        <h1 class="text-uppercase mb-0 text-center">Analyze, and Sanitize your WhatsUp Chats</h1>
+        <hr class="star-light" />
+
+        <!-- Upload Field -->
+
+        <div id="upload" class="text-center">
+          <div id="filedrag">
+            <h2>Drop files here</h2>
+            <h2>or click to upload!</h2>
+            <input type="file" accept=".txt,.zip" id="file-input" hidden />
+          </div>
+          <p></p>
+
+          <div class="container error" id="error">
+            <h2>Please unzip your file! Only .txt supported!</h2>
+          </div>
+          <div class="container groups" id="groupInfo">
+            <h2>Was this a group chat?</h2>
+          </div>
+          <div class="container loading text-center pt-1" id="loading">
+            <h2 class="pb-2">Analyzing your chat!</h2>
+            <div class="loader pt-2"></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- feedback form --->
+    <div id="feedback">
+      <div
+        id="feedback-form"
+        style="display: none; background: white"
+        class="col-xs-4 panel panel-default"
+      >
+        <form action="mailto:paulkiragu621@gmail.com" method="GET">
+          <p class="">Please send an email at: paulkiragu621@gmail.com</p>
+          <!--
+            <label>Your email:<input name="subject" type="text" class="form-control"/></label>
+            <label>Comments:
+            <textarea class="form-control" type="textarea" id="comments" placeholder="Any ideas? Missing something? Tool does not work?" name="body" maxlength="6000"></textarea>
+            </label>
+          <input type="submit" value="Send me an email"  class="btn btn-lg btn-warning pull-right pb-2 mb-2"/>
+          -->
+        </form>
+      </div>
+      <div id="feedback-tab">FIND ME</div>
+    </div>
+
+    <!-- Tutorial -->
+    <section class="tutorial pt-5" id="tutorial">
+      <div class="container">
+        <h2 class="text-center text-uppercase text-secondary mb-0">How to Sanitize</h2>
+        <hr class="star-dark mb-5" />
+
+        <h5 class="text-center text-secondary">
+          Please export your WhatsApp chat history and select the .txt file when
+          clicking on the button above.
+        </h5>
+
+        <div class="row">
+          <div class="col-md-4 offset-md-4">
+            <p class="text-secondary pt-2">
+              <b
+                >To export a copy of the history of an individual chat or group,
+                use the Email chat feature:</b
+              ><br />
+
+              Open the chat for the individual or group.
+            </p>
+
+            <ul>
+              <li>Tap the Menu Button.</li>
+              <li>Tap More.</li>
+              <li>Tap Email chat.</li>
+              <li>Choose <b>NOT</b> to attach Media.</li>
+            </ul>
+            An email will be composed with your chat history attached as a
+            .txt/.zip document.
+            <h4 class="text-center">
+              Don't forget to <b>unzip</b> and select the .txt file!
+            </h4>
+
+            <p class="text-center text-muted small">
+              For more info please click
+              <a href="https://faq.whatsapp.com/en/android/23756533/">here</a>.
+            </p>
+          </div>
+        </div>
+        <hr class="style1" />
+        <h2 class="text-center text-uppercase text-secondary pt-4 mb-0">
+          Example
+        </h2>
+        <div>
+          <img src="{% static 'img/example.png' %}" class="img-fluid" alt="example" />
+        </div>
+      </div>
+    </section>
+
+    <!-- results -->
+    <section class="results" id="results">
+      <div class="container">
+        <h2 class="text-center text-uppercase text-secondary mb-0">Results</h2>
+        <hr class="star-dark mb-5" />
+
+        <div id="group">
+          <div class="text-center" id="groupTable">
+            <!-- individual Group DATA -->
+            <table class="table table-hover" id="myTable">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Name</th>
+                  <th scope="col" onclick="sortTable(1)">Messages</th>
+                  <th scope="col" onclick="sortTable(2)">Words per Message</th>
+                  <th scope="col" onclick="sortTable(3)">Sent Pics</th>
+                  <th scope="col" onclick="sortTable(4)">Sent Audio</th>
+                  <th scope="col">Most Used Words</th>
+                </tr>
+              </thead>
+
+              <tbody id="groupTableRows"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Words per user -->
+        <!--
+          <div class="row pt-4">
+            <canvas id="barWords"></canvas>
+          </div>
+          -->
+        <div id="1on1chat">
+          <div class="row text-center" id="users">
+            <!-- individual USER DATA -->
+          </div>
+
+          <div class="text-center pt-3 pb-2" id="mostUsedButtons">
+            <!-- most Used Words filter button -->
+          </div>
+
+          <div class="row text-center" id="usersWords">
+            <!-- individual words of users -->
+          </div>
+
+          <div class="text-center pt-3 pb-2 userRows text-white" id="usersRows">
+            <!-- colums USER DATA -->
+          </div>
+        </div>
+
+        <!-- Messages per day -->
+        <h2
+          class="text-center text-uppercase text-secondary mb-0 mt-5 pb-2 pt-2"
+        >
+          Messages per Weekday
+        </h2>
+        <div class="row pt-4">
+          <canvas id="dayRadar"></canvas>
+        </div>
+        <!-- Chronological View -->
+        <h2
+          class="text-center text-uppercase text-secondary mb-0 mt-5 pb-2 pt-4"
+        >
+          Chronological Graph
+        </h2>
+        <div class="row pt-4">
+          <canvas id="chronologicalGraph"></canvas>
+        </div>
+
+        <!-- Chronological View -->
+        <!--
+          <h2 class="text-center text-uppercase text-secondary mb-0 mt-5 pb-2 pt-5">Chronological Graph</h2>
+          <div class="row pt-4">
+            <canvas id="chronologicalGraph2"></canvas>
+          </div>
+        -->
+      </div>
+    </section>
+
+    <!-- Footer -->
+
+    <!-- Copyright -->
+    <div class="copyright py-4 text-center text-white">
+      <div class="container">
+        <p>
+          <small>
+            <a href="DataPrivacyRegulation.html">
+              Disclaimer & Data Privacy
+            </a></small
+          >
+        </p>
+
+        <small
+          >WhatsApp is a registered trademark of WhatsApp Inc. This site and
+          service are not related in any way to WhatsApp Inc.</small
+        >
+        <p></p>
+        <p><small>Copyright &copy; AlienX 2022</small></p>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+    <!-- Custom scripts for this template
+    <script src="js/freelancer.min.js"></script>-->
+
+    <!-- chart.js -->
+    <script src="{% static 'js/moment.js' %}"></script>
+    <script src="{% static 'js/Chart.min.js' %}"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.3.0/dist/chartjs-plugin-datalabels.min.js"></script>-->
+
+    <!-- feedback form-->
+    <script src="{% static 'js/feedback.js' %}"></script>
+    <script src="{% static 'js/form.js' %}"></script>
+
+    <!-- Html 2 canvas --->
+
+    <script src="{% static 'js/html2canvas.min.js' %}"></script>
+    <script src="{% static 'js/FileSaver.min.js' %}"></script>
+    <!---<script src="js/screenshot0.js"></script>--->
+    <script src="{% static 'js/screenshot1.js' %}"></script>
+    <script src="{% static 'js/screenshot2.js' %}"></script>
+    <script src="{% static 'js/screenshot3.js' %}"></script>
+
+    <!-- My own scripts to analyze the chat file -->
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/stopwords.js' %}"></script>
+
+    <!-- SumoMe -->
+    <script async>
+      (function (s, u, m, o, j, v) {
+        j = u.createElement(m);
+        v = u.getElementsByTagName(m)[0];
+        j.async = 1;
+        j.src = o;
+        j.dataset.sumoSiteId =
+          "3a188d739b5f8db07e60404f9b3a748f7e5664c60b71d9a9760bdfed904c77d3";
+        v.parentNode.insertBefore(j, v);
+      })(window, document, "script", "//load.sumo.com/");
+    </script>
+    <!--
+    <script async>(function(s,u,m,o,j,v){j=u.createElement(m);v=u.getElementsByTagName(m)[0];j.async=1;j.src=o;j.dataset.sumoSiteId='4ace5feecfd01c92a68c0e3cf50f18bd93a1d55585178a15098c3e2d6d56d7d3';v.parentNode.insertBefore(j,v)})(window,document,'script','//load.sumo.com/');</script>
+  --></body>
+</html>

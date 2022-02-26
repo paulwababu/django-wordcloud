@@ -73,6 +73,7 @@ function FileClick(e) {
 function readSingleFile(e) {
 	// handle file
 	var file = e.target.files[0];
+	
 	if (!file || file.type != "text/plain") {
 		console.log("ERROR! No txt file selected!");
 		var er = document.getElementById("error");
