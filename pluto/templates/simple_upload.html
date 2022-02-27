@@ -1,20 +1,106 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <title>Simple File Upload</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        /*
+*
+* ==========================================
+* CUSTOM UTIL CLASSES
+* ==========================================
+*
+*/
+
+.file-upload input[type='file'] {
+  display: none;
+}
+
+/*
+*
+* ==========================================
+* FOR DEMO PURPOSES
+* ==========================================
+*
+*/
+
+body {
+  background: #50BD9C;
+  background: -webkit-linear-gradient(to right, #0083B0, #00B4DB);
+  background: linear-gradient(to right, #50BD9C, #50BD9C);
+  height: 100vh;
+}
+
+.rounded-lg {
+  border-radius: 1rem;
+}
+
+.custom-file-label.rounded-pill {
+  border-radius: 50rem;
+}
+
+.custom-file-label.rounded-pill::after {
+  border-radius: 0 50rem 50rem 0;
+}
+
+    </style>
+    <title>Sanitizer Part 2</title>
   </head>
   <body>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="file" name="myfile">
-        <button type="submit">Upload</button>
-      </form>
-    
-      {% if uploaded_file_url %}
-        <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
-      {% endif %}
-    
-      <p><a href="{% url 'home' %}">Return to home</a></p>
+    <section>
+        <div class="container p-5">
+          <!-- For demo purpose -->
+          <div class="row mb-5 text-center text-white">
+            <div class="col-lg-10 mx-auto">
+              <h1 class="display-4" style="font-weight: bolder;">ANALYZE, AND SANITIZE YOUR WHATSAPP CHATS</h1>
+              <hr class="star-light" />
+              <p class="lead">Generate a WordCloud image which contains all common words used in a WhatsApp chat.</p>
+            </div>
+          </div>
+          <!-- End -->
+      
+      
+          <div class="row">
+            <div class="col-lg-5 mx-auto">
+              <div class="p-5 bg-white shadow rounded-lg"><img src="https://bootstrapious.com/i/snippets/sn-file-upload/img.png" alt="" width="200" class="d-block mx-auto mb-4 rounded-pill">
+      
+                <!-- Default bootstrap file upload-->
+      
+                <h6 class="text-center mb-4 text-muted">
+                  You can use default Bootstrap file upload
+                </h6>
+      
+                <div class="custom-file overflow-hidden rounded-pill mb-5">
+                  <input id="customFile" type="file" class="custom-file-input rounded-pill">
+                  <label for="customFile" class="custom-file-label rounded-pill">Choose file</label>
+                </div>
+                <!-- End -->
+      
+                <h6 class="text-center mb-4 text-muted">
+                  Or a custom button that launches file browser
+                </h6>
+      
+                <!-- Custom bootstrap upload file-->
+                <label for="fileUpload" class="file-upload btn btn-primary btn-block rounded-pill shadow"><i class="fa fa-upload mr-2"></i>Browse for file ...
+                              <input id="fileUpload" type="file">
+                          </label>
+                <!-- End -->
+      
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 </html>
