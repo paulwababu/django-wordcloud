@@ -13,7 +13,7 @@ import cloudinary.uploader
 import cloudinary.api
 
 def read_chat(url):
-    chat_file = url#open(url, encoding = "utf8")
+    chat_file = url
     chat_text = chat_file.read()
     chat_list = chat_text.split('\n')
     

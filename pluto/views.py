@@ -10,14 +10,7 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from .wordcloud import show
-from .models import Document
-from .forms import DocumentForm
 import os
-
-# Create your views here.
-def home(request):
-    documents = Document.objects.all()
-    return render(request, 'home.html', { 'documents': documents })
 
 
 def simple_upload(request):
@@ -44,19 +37,6 @@ def simple_upload(request):
             'uploaded_file_url': a['secure_url'][54:]
         })
     return render(request, 'simple_upload.html')
-
-
-def model_form_upload(request):
-    if request.method == 'POST':
-        form = DocumentForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-    else:
-        form = DocumentForm()
-    return render(request, 'model_form_upload.html', {
-        'form': form
-    })
 
 
 def test(request):
