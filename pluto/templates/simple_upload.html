@@ -48,7 +48,7 @@ body {
 }
 
     </style>
-    <title>Sanitizer Part 2</title>
+    <title>WordCloud - Visualize your WhatsApp Chats</title>
   </head>
   <body>
     <section>
@@ -73,23 +73,22 @@ body {
                 <h6 class="text-center mb-4 text-muted">
                   Upload your chat export to get a WordCloud image of the most used words in a WhatsApp chat
                 </h6>
-      
+               <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
                 <div class="custom-file overflow-hidden rounded-pill mb-5">
-                  <input id="customFile" type="file" class="custom-file-input rounded-pill">
+                  <input id="customFile" name="uploadedFile" type="file" class="custom-file-input rounded-pill">
                   <label for="customFile" class="custom-file-label rounded-pill">Choose file</label>
                 </div>
                 <!-- End -->
       
-                <h6 class="text-center mb-4 text-muted">
-                  Or a custom button that launches file browser
-                </h6>
-      
+                
                 <!-- Custom bootstrap upload file-->
-                <label for="fileUpload" class="file-upload btn btn-primary btn-block rounded-pill shadow"><i class="fa fa-upload mr-2"></i>Browse for file ...
-                              <input id="fileUpload" type="file">
-                          </label>
+                <button type="submit" class="file-upload btn btn-primary btn-block rounded-pill shadow"><i class="fa fa-upload mr-2"></i>Sanitize ...
+                              
+                </button>
                 <!-- End -->
-      
+               </form>
+               <br>
               </div>
             </div>
           </div>
